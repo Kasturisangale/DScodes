@@ -1,4 +1,4 @@
-//DOUBLE LINKED LIST
+//DOUBLE LINKED LIST AND ITS OPERATIONS
 
 #include<stdio.h>
 #include<stdlib.h>
