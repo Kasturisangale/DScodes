@@ -209,5 +209,7 @@ int main(){
 			Sort(head);
 			print(head); 
 		        break;
+		default:
+			printf("Invalid Choice Entered");
 	}
 }
