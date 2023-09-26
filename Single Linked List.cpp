@@ -207,6 +207,7 @@ int main(){
 			break;
 		case 6:
 			Sort(head);
-			print(head);  
+			print(head); 
+		        break;
 	}
 }
