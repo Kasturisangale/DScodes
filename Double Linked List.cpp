@@ -1,4 +1,4 @@
-//DOUBLE LINKED LIST AND ITS OPERATIONS
+//DOUBLE LINKED LIST
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -46,11 +46,11 @@ void print(struct node* head){
 
 //for inserting an element in the linked list
 void insert(struct node* head){
-	int x,k,count=0;
+	int x,k,count=0,flag=0;
 	struct node* ptr=(struct node*)malloc(sizeof(struct node));
 	printf("Enter the Element to be inserted: ");
 	scanf("%d",&x);
-	printf("Enter the index at which Element is to be inserted: ");
+	printf("Enter the index at which Element is to be inserted (starting with Index 0): ");
 	scanf("%d",&k);
 	ptr->data=x;
 	ptr->prev=NULL;
@@ -61,6 +61,7 @@ void insert(struct node* head){
 		ptr->next=head;
 		head->prev=ptr;
 		head=ptr;
+		flag=1;
 	}
 	else{
 		while(temp!=NULL){
@@ -70,13 +71,20 @@ void insert(struct node* head){
 			    ptr->next=z;
 			    ptr->prev=temp;
 			    ptr->next->prev=ptr;
+				flag=1;
 			    break;
-	        }
-	        else{
+	                }
+	                else{
 	        	temp=temp->next;
 	        	count+=1;
 			}
-	    }
+	        }
+	}
+	if(flag==1){
+		printf("Inserted Successfully\n");
+	}
+	else{
+		printf("Invalid Index\n");
 	}
 	print(head);
 }
@@ -86,7 +94,7 @@ void deletee(struct node* head){
 	int k,count=0,flag=0;
 	struct node* temp=head;
 	struct node* z;
-	printf("Enter the index which you want to delete: ");
+	printf("Enter the index which you want to delete (starting with Index 0): ");
 	scanf("%d",&k);
 	if(k==0){
 		head->next->prev=NULL;
@@ -94,7 +102,7 @@ void deletee(struct node* head){
 		flag=1;
 	}
 	else{
-		while(temp!=NULL){
+		while(temp->next->next!=NULL){
 			if(count==k-1){
 				z=temp->next->next;
 				temp->next->next->prev=temp;
@@ -106,10 +114,16 @@ void deletee(struct node* head){
 				temp=temp->next;
 				count+=1;
 			}
-		}
+	        }
+                if(flag!=1){
+                   if(count==k-1){
+                      temp->next=NULL;
+                      flag=1;
+                   }    
+                }    
 	}
 	if (flag==1){
-		printf("Inserted Successfully!\n");
+		printf("Deleted Successfully!\n");
 	}
 	else{
 		printf("Invalid Index\n");
@@ -136,7 +150,47 @@ void Search(struct node* head){
 		printf("Element Found");
 	}
 	else{
-		printf("Eleement not Found");
+		printf("Element not Found");
+	}
+}
+
+//To Reverse the LL
+void Reverse(struct node* head){
+    int arr[50],i,count=0;
+	struct node* temp=head;
+    while(temp!=NULL){
+		arr[count]=temp->data;
+		temp=temp->next;
+		count+=1;
+    }
+    for (i=0;i<count;i++){
+		printf("%d ",arr[count-1-i]);
+    }
+}
+
+void Sort(struct node* head){
+	int j,i=0,count=0,temp;
+	struct node* tempp=head;
+	int arr[50];
+	while(tempp!=NULL){
+		arr[i]=tempp->data;
+		count+=1;
+		i+=1;
+		tempp=tempp->next;
+	}
+	for (i=0;i<count-1;i++){
+		for (j=0;j<count-1;j++){
+			if (arr[j]>arr[j+1]){
+				temp=arr[j+1];
+				arr[j+1]=arr[j];
+				arr[j]=temp;
+			}
+		}
+	}
+	tempp=head;
+	for (i=0;i<count;i++){
+		tempp->data=arr[i];
+		tempp=tempp->next;
 	}
 }
 
@@ -146,7 +200,7 @@ int main(){
 	struct node* head=(struct node*)malloc(sizeof(struct node));
 	create(head);
 	printf("You have successfully created a Linked List");
-	printf("\n1.Print the LL\n2.Insertion\n3.Deletion\n4.Searching an Element\n");
+	printf("\n1.Print the LL\n2.Insertion\n3.Deletion\n4.Searching an Element\n5.Reverse the LL\n6.Sort the LL\n");
 	printf("Select one of the above operations: ");
 	scanf("%d",&ch);
 	switch(ch){
@@ -162,7 +216,14 @@ int main(){
 		case 4:
 			Search(head);
 			break;
+                case 5:
+                        Reverse(head);
+                        break;
+                case 6:
+                        Sort(head);
+		        print(head);
+                        break;
 		default:
 			printf("Invalid Choice Entered");
-    }  
+       }  
 }
