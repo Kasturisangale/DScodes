@@ -86,7 +86,7 @@ void insert(struct node* head){
 void deletee(struct node* head){
 	int count=0,k, flag=0;
 	struct node* tempp=head;
-	printf("Enter the Index you want to delete: ");
+	printf("Enter the Index you want to delete (starting with Index 0): ");
 	scanf("%d",&k);
 	if (k==0){
 		head=head->link;
