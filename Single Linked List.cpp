@@ -50,7 +50,7 @@ void insert(struct node* head){
 	scanf("%d",&x);
 	ptr->data=x;
 	ptr->link=NULL;
-	printf("Enter the Index at which you want to Insert an Element(starting with 0): ");
+	printf("Enter the Index at which you want to Insert an Element (starting with 0): ");
 	scanf("%d",&k);
 	if (k==0){
 		ptr->link=head;
