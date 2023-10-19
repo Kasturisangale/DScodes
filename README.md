@@ -1,2 +1,2 @@
 # DScodes
-This contains codes from Data Structure.
+This Repository contains codes from Data Structure.
